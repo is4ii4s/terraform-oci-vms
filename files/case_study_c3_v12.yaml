@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: c3objects
+  name: podsrole_n
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: 
+  namespace: c3objects
+  name: read-pods
+subjects:
+- kind: User
+  name: cody
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: podsrole_n
+  apiGroup: rbac.authorization.k8s.io
